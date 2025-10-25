@@ -15,6 +15,7 @@ Halloween-themed API integration challenge for checking ghost capture readiness 
 Returns a list of all ghost entities with their required equipment.
 
 **Response Example:**
+
 ```json
 {
   "success": true,
@@ -45,22 +46,21 @@ Returns a list of all ghost entities with their required equipment.
 Compares user's inventory against ghost requirements and returns a mission report.
 
 **Request Body:**
+
 ```json
 {
-  "inventory": [
-    "Proton Pack",
-    "Ghost Trap",
-    "PKE Meter"
-  ],
+  "inventory": ["Proton Pack", "Ghost Trap", "PKE Meter"],
   "entities": ["ghost-001", "ghost-002"]
 }
 ```
 
 **Notes:**
+
 - `inventory` (required): Array of equipment strings you currently have
 - `entities` (optional): Array of ghost entity IDs to check. If omitted, checks all ghosts.
 
 **Response Example:**
+
 ```json
 {
   "success": true,
@@ -100,30 +100,6 @@ Compares user's inventory against ghost requirements and returns a mission repor
 }
 ```
 
-## Project Structure
-
-```
-camp-apex-apis/
-├── app/
-│   ├── api/
-│   │   └── ghostbusters/
-│   │       ├── entities/route.ts
-│   │       └── check-equipment/route.ts
-│   ├── layout.tsx
-│   └── page.tsx
-├── lib/
-│   ├── data/
-│   │   └── ghostbusters/
-│   │       └── ghosts.ts
-│   └── utils/
-│       └── ghostbusters/
-│           └── equipmentChecker.ts
-├── types/
-│   └── ghostbusters.ts
-├── package.json
-└── README.md
-```
-
 ## Ghost Entities
 
 The API includes 4 ghost entities:
@@ -144,100 +120,6 @@ The API includes 4 ghost entities:
 - Protection Grid
 - Proton Grenades
 - Ecto-1 Vehicle
-
-## Getting Started
-
-### Prerequisites
-
-- Node.js 18.x or higher
-- npm or yarn
-
-### Installation
-
-```bash
-npm install
-```
-
-### Development
-
-```bash
-npm run dev
-```
-
-Visit `http://localhost:3000` to see the app.
-
-### Build
-
-```bash
-npm run build
-```
-
-### Production
-
-```bash
-npm start
-```
-
-## Testing the API
-
-### Using cURL
-
-**Get all entities:**
-```bash
-curl http://localhost:3000/api/ghostbusters/entities
-```
-
-**Check equipment for all ghosts:**
-```bash
-curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
-  -H "Content-Type: application/json" \
-  -d '{
-    "inventory": ["Proton Pack", "Ghost Trap", "PKE Meter", "Ecto Goggles"]
-  }'
-```
-
-**Check equipment for specific ghosts:**
-```bash
-curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
-  -H "Content-Type: application/json" \
-  -d '{
-    "inventory": ["Proton Pack", "Ghost Trap", "PKE Meter"],
-    "entities": ["ghost-001", "ghost-002"]
-  }'
-```
-
-## Deployment
-
-This project is designed to be deployed on Vercel:
-
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/camp-apex-apis)
-
-### Manual Deployment
-
-1. Install Vercel CLI:
-```bash
-npm install -g vercel
-```
-
-2. Deploy:
-```bash
-vercel
-```
-
-## Future Modules
-
-The architecture supports easy addition of new API modules:
-
-- `/api/weather-spooky/` - Weather API with Halloween themes
-- `/api/[your-module]/` - Add your own module
-
-## Tech Stack
-
-- **Framework:** Next.js 16 (App Router)
-- **Language:** TypeScript
-- **Styling:** Tailwind CSS 4
-- **Runtime:** Node.js
-- **Hosting:** Vercel
 
 ## License
 
