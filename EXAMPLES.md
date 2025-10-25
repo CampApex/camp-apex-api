@@ -5,10 +5,11 @@
 ### 1. Get All Ghost Entities
 
 ```bash
-curl http://localhost:3000/api/ghostbusters/entities
+curl http://camp-apex-api.vercel.app/api/ghostbusters/entities
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -20,11 +21,16 @@ curl http://localhost:3000/api/ghostbusters/entities
       "classification": "Class 5 Full Roaming Vapor",
       "danger_rating": 3,
       "ectoplasm_level": 8,
-      "required_equipment": ["Proton Pack", "Ghost Trap", "PKE Meter", "Ecto Goggles"],
+      "required_equipment": [
+        "Proton Pack",
+        "Ghost Trap",
+        "PKE Meter",
+        "Ecto Goggles"
+      ],
       "location": "Sedgewick Hotel Kitchen",
       "bounty": 5000,
       "manifestation_time": "11:30 PM"
-    },
+    }
     // ... more ghosts
   ]
 }
@@ -35,7 +41,7 @@ curl http://localhost:3000/api/ghostbusters/entities
 ### 2. Check Equipment - Full Inventory (Can capture Slimer!)
 
 ```bash
-curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
+curl -X POST http://camp-apex-api.vercel.app/api/ghostbusters/check-equipment \
   -H "Content-Type: application/json" \
   -d '{
     "inventory": ["Proton Pack", "Ghost Trap", "PKE Meter", "Ecto Goggles"]
@@ -43,6 +49,7 @@ curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -79,7 +86,13 @@ curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
     "ghosts_ready": 1,
     "ghosts_need_equipment": 3
   },
-  "missing_equipment": ["Containment Unit", "Ecto-1 Vehicle", "Muon Trap", "Protection Grid", "Proton Grenades"]
+  "missing_equipment": [
+    "Containment Unit",
+    "Ecto-1 Vehicle",
+    "Muon Trap",
+    "Protection Grid",
+    "Proton Grenades"
+  ]
 }
 ```
 
@@ -88,7 +101,7 @@ curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
 ### 3. Check Equipment - Minimal Inventory
 
 ```bash
-curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
+curl -X POST http://camp-apex-api.vercel.app/api/ghostbusters/check-equipment \
   -H "Content-Type: application/json" \
   -d '{
     "inventory": ["Proton Pack", "Ghost Trap"]
@@ -96,6 +109,7 @@ curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -120,7 +134,15 @@ curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
     "ghosts_ready": 0,
     "ghosts_need_equipment": 4
   },
-  "missing_equipment": ["Containment Unit", "Ecto-1 Vehicle", "Ecto Goggles", "Muon Trap", "PKE Meter", "Protection Grid", "Proton Grenades"]
+  "missing_equipment": [
+    "Containment Unit",
+    "Ecto-1 Vehicle",
+    "Ecto Goggles",
+    "Muon Trap",
+    "PKE Meter",
+    "Protection Grid",
+    "Proton Grenades"
+  ]
 }
 ```
 
@@ -129,7 +151,7 @@ curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
 ### 4. Check Equipment - Specific Ghost Only
 
 ```bash
-curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
+curl -X POST http://camp-apex-api.vercel.app/api/ghostbusters/check-equipment \
   -H "Content-Type: application/json" \
   -d '{
     "inventory": ["Proton Pack", "Ghost Trap", "PKE Meter", "Ecto Goggles"],
@@ -138,6 +160,7 @@ curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -171,7 +194,7 @@ curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
 ### 5. Check Equipment - Multiple Specific Ghosts
 
 ```bash
-curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
+curl -X POST http://camp-apex-api.vercel.app/api/ghostbusters/check-equipment \
   -H "Content-Type: application/json" \
   -d '{
     "inventory": ["Proton Pack", "Ghost Trap", "PKE Meter", "Ecto Goggles", "Containment Unit"],
@@ -180,6 +203,7 @@ curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -215,7 +239,7 @@ curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
 ### 6. Check Equipment - Complete Arsenal (All Ghosts!)
 
 ```bash
-curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
+curl -X POST http://camp-apex-api.vercel.app/api/ghostbusters/check-equipment \
   -H "Content-Type: application/json" \
   -d '{
     "inventory": [
@@ -233,6 +257,7 @@ curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
 ```
 
 **Response:**
+
 ```json
 {
   "success": true,
@@ -282,12 +307,13 @@ curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
 ### Missing Inventory Field
 
 ```bash
-curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
+curl -X POST http://camp-apex-api.vercel.app/api/ghostbusters/check-equipment \
   -H "Content-Type: application/json" \
   -d '{}'
 ```
 
 **Response:**
+
 ```json
 {
   "error": "Bad Request",
@@ -300,7 +326,7 @@ curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
 ### Invalid Inventory Format
 
 ```bash
-curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
+curl -X POST http://camp-apex-api.vercel.app/api/ghostbusters/check-equipment \
   -H "Content-Type: application/json" \
   -d '{
     "inventory": "not an array"
@@ -308,6 +334,7 @@ curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
 ```
 
 **Response:**
+
 ```json
 {
   "error": "Bad Request",
@@ -320,7 +347,7 @@ curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
 ### Invalid Ghost Entity ID
 
 ```bash
-curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
+curl -X POST http://camp-apex-api.vercel.app/api/ghostbusters/check-equipment \
   -H "Content-Type: application/json" \
   -d '{
     "inventory": ["Proton Pack"],
@@ -329,6 +356,7 @@ curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
 ```
 
 **Response:**
+
 ```json
 {
   "error": "Not Found",
@@ -343,32 +371,32 @@ curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
 ### Get All Entities
 
 ```javascript
-fetch('http://localhost:3000/api/ghostbusters/entities')
-  .then(response => response.json())
-  .then(data => console.log(data))
-  .catch(error => console.error('Error:', error));
+fetch("http://camp-apex-api.vercel.app/api/ghostbusters/entities")
+  .then((response) => response.json())
+  .then((data) => console.log(data))
+  .catch((error) => console.error("Error:", error));
 ```
 
 ### Check Equipment
 
 ```javascript
-fetch('http://localhost:3000/api/ghostbusters/check-equipment', {
-  method: 'POST',
+fetch("http://camp-apex-api.vercel.app/api/ghostbusters/check-equipment", {
+  method: "POST",
   headers: {
-    'Content-Type': 'application/json',
+    "Content-Type": "application/json",
   },
   body: JSON.stringify({
-    inventory: ['Proton Pack', 'Ghost Trap', 'PKE Meter', 'Ecto Goggles'],
-    entities: ['ghost-001', 'ghost-002']
-  })
+    inventory: ["Proton Pack", "Ghost Trap", "PKE Meter", "Ecto Goggles"],
+    entities: ["ghost-001", "ghost-002"],
+  }),
 })
-  .then(response => response.json())
-  .then(data => {
-    console.log('Mission Report:', data.mission_report);
-    console.log('Summary:', data.summary);
-    console.log('Missing Equipment:', data.missing_equipment);
+  .then((response) => response.json())
+  .then((data) => {
+    console.log("Mission Report:", data.mission_report);
+    console.log("Summary:", data.summary);
+    console.log("Missing Equipment:", data.missing_equipment);
   })
-  .catch(error => console.error('Error:', error));
+  .catch((error) => console.error("Error:", error));
 ```
 
 ---
@@ -380,7 +408,7 @@ fetch('http://localhost:3000/api/ghostbusters/check-equipment', {
 ```python
 import requests
 
-response = requests.get('http://localhost:3000/api/ghostbusters/entities')
+response = requests.get('http://camp-apex-api.vercel.app/api/ghostbusters/entities')
 data = response.json()
 print(f"Found {data['count']} ghosts")
 for ghost in data['entities']:
@@ -398,7 +426,7 @@ payload = {
 }
 
 response = requests.post(
-    'http://localhost:3000/api/ghostbusters/check-equipment',
+    'http://camp-apex-api.vercel.app/api/ghostbusters/check-equipment',
     json=payload
 )
 
