@@ -1,0 +1,18 @@
+<svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Background -->
+  <rect width="64" height="64" rx="12" fill="#0a0a0a"/>
+
+  <!-- Ghost shape -->
+  <path d="M32 12C24 12 18 18 18 26C18 30 18 38 18 42C18 42 20 40 22 40C24 40 24 42 26 42C28 42 28 40 30 40C32 40 32 42 34 42C36 42 36 40 38 40C40 40 40 42 42 42C44 42 44 40 46 40C48 40 46 42 46 42C46 38 46 30 46 26C46 18 40 12 32 12Z" fill="#ff6b35"/>
+
+  <!-- Eyes -->
+  <ellipse cx="26" cy="24" rx="3" ry="4" fill="#0a0a0a"/>
+  <ellipse cx="38" cy="24" rx="3" ry="4" fill="#0a0a0a"/>
+
+  <!-- Mouth -->
+  <ellipse cx="32" cy="32" rx="2.5" ry="3" fill="#0a0a0a"/>
+
+  <!-- Highlight/shine -->
+  <circle cx="28" cy="22" r="1.5" fill="#fdc830" opacity="0.8"/>
+  <circle cx="40" cy="22" r="1.5" fill="#fdc830" opacity="0.8"/>
+</svg>

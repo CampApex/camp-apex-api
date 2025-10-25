@@ -1,36 +1,244 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Camp Apex APIs
+
+A Next.js API project hosted on Vercel featuring multiple API modules. Built with TypeScript, App Router, and Tailwind CSS for scalability.
+
+## Current Modules
+
+### Ghostbusters Equipment Checker
+
+Halloween-themed API integration challenge for checking ghost capture readiness based on equipment inventory.
+
+#### Endpoints
+
+##### GET /api/ghostbusters/entities
+
+Returns a list of all ghost entities with their required equipment.
+
+**Response Example:**
+```json
+{
+  "success": true,
+  "count": 4,
+  "entities": [
+    {
+      "entity_id": "ghost-001",
+      "name": "Slimer",
+      "classification": "Class 5 Full Roaming Vapor",
+      "danger_rating": 3,
+      "ectoplasm_level": 8,
+      "required_equipment": [
+        "Proton Pack",
+        "Ghost Trap",
+        "PKE Meter",
+        "Ecto Goggles"
+      ],
+      "location": "Sedgewick Hotel Kitchen",
+      "bounty": 5000,
+      "manifestation_time": "11:30 PM"
+    }
+  ]
+}
+```
+
+##### POST /api/ghostbusters/check-equipment
+
+Compares user's inventory against ghost requirements and returns a mission report.
+
+**Request Body:**
+```json
+{
+  "inventory": [
+    "Proton Pack",
+    "Ghost Trap",
+    "PKE Meter"
+  ],
+  "entities": ["ghost-001", "ghost-002"]
+}
+```
+
+**Notes:**
+- `inventory` (required): Array of equipment strings you currently have
+- `entities` (optional): Array of ghost entity IDs to check. If omitted, checks all ghosts.
+
+**Response Example:**
+```json
+{
+  "success": true,
+  "mission_report": {
+    "ready_to_capture": [
+      {
+        "entity_id": "ghost-001",
+        "name": "Slimer",
+        "classification": "Class 5 Full Roaming Vapor",
+        "location": "Sedgewick Hotel Kitchen",
+        "bounty": 5000,
+        "can_capture": true,
+        "missing_equipment": [],
+        "danger_rating": 3
+      }
+    ],
+    "need_equipment": [
+      {
+        "entity_id": "ghost-002",
+        "name": "Library Ghost",
+        "classification": "Class 4 Repeating Phantasm",
+        "location": "New York Public Library",
+        "bounty": 7500,
+        "can_capture": false,
+        "missing_equipment": ["Containment Unit", "Ecto Goggles"],
+        "danger_rating": 5
+      }
+    ]
+  },
+  "summary": {
+    "total_potential_earnings": 12500,
+    "guaranteed_earnings": 5000,
+    "ghosts_ready": 1,
+    "ghosts_need_equipment": 1
+  },
+  "missing_equipment": ["Containment Unit", "Ecto Goggles"]
+}
+```
+
+## Project Structure
+
+```
+camp-apex-apis/
+├── app/
+│   ├── api/
+│   │   └── ghostbusters/
+│   │       ├── entities/route.ts
+│   │       └── check-equipment/route.ts
+│   ├── layout.tsx
+│   └── page.tsx
+├── lib/
+│   ├── data/
+│   │   └── ghostbusters/
+│   │       └── ghosts.ts
+│   └── utils/
+│       └── ghostbusters/
+│           └── equipmentChecker.ts
+├── types/
+│   └── ghostbusters.ts
+├── package.json
+└── README.md
+```
+
+## Ghost Entities
+
+The API includes 4 ghost entities:
+
+1. **Slimer** - Class 5 Full Roaming Vapor (Bounty: $5,000)
+2. **Library Ghost** - Class 4 Repeating Phantasm (Bounty: $7,500)
+3. **Vinz Clortho (Terror Dog)** - Class 7 Metaspectral Infestation (Bounty: $15,000)
+4. **Stay Puft Marshmallow Man** - Class 8 Giga-manifestation (Bounty: $50,000)
+
+## Available Equipment Types
+
+- Proton Pack
+- Ghost Trap
+- PKE Meter
+- Ecto Goggles
+- Containment Unit
+- Muon Trap
+- Protection Grid
+- Proton Grenades
+- Ecto-1 Vehicle
 
 ## Getting Started
 
-First, run the development server:
+### Prerequisites
+
+- Node.js 18.x or higher
+- npm or yarn
+
+### Installation
+
+```bash
+npm install
+```
+
+### Development
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Visit `http://localhost:3000` to see the app.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+### Build
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+```bash
+npm run build
+```
 
-## Learn More
+### Production
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+npm start
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+## Testing the API
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Using cURL
 
-## Deploy on Vercel
+**Get all entities:**
+```bash
+curl http://localhost:3000/api/ghostbusters/entities
+```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+**Check equipment for all ghosts:**
+```bash
+curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
+  -H "Content-Type: application/json" \
+  -d '{
+    "inventory": ["Proton Pack", "Ghost Trap", "PKE Meter", "Ecto Goggles"]
+  }'
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+**Check equipment for specific ghosts:**
+```bash
+curl -X POST http://localhost:3000/api/ghostbusters/check-equipment \
+  -H "Content-Type: application/json" \
+  -d '{
+    "inventory": ["Proton Pack", "Ghost Trap", "PKE Meter"],
+    "entities": ["ghost-001", "ghost-002"]
+  }'
+```
+
+## Deployment
+
+This project is designed to be deployed on Vercel:
+
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https://github.com/yourusername/camp-apex-apis)
+
+### Manual Deployment
+
+1. Install Vercel CLI:
+```bash
+npm install -g vercel
+```
+
+2. Deploy:
+```bash
+vercel
+```
+
+## Future Modules
+
+The architecture supports easy addition of new API modules:
+
+- `/api/weather-spooky/` - Weather API with Halloween themes
+- `/api/[your-module]/` - Add your own module
+
+## Tech Stack
+
+- **Framework:** Next.js 16 (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS 4
+- **Runtime:** Node.js
+- **Hosting:** Vercel
+
+## License
+
+MIT
