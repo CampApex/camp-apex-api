@@ -2,11 +2,35 @@
 
 A Next.js API project hosted on Vercel featuring multiple API modules. Built with TypeScript, App Router, and Tailwind CSS for scalability.
 
+## API Documentation
+
+### 🎃 [Apex Week of Horror 2025](./Apex%20Week%20of%20Horror%202025.md)
+Halloween-themed Ghostbusters API for checking ghost capture readiness based on equipment inventory. Learn API integration while hunting ghosts and earning bounties!
+
+**Features:**
+- GET all ghost entities with required equipment
+- POST to check equipment readiness against specific ghosts
+- Calculate potential earnings from ghost bounties
+- Perfect for learning HTTP requests and JSON parsing
+
+### 🎄 [Advent of Salesforce 2025 API Examples](./Advent%20of%20Salesforce%202025%20API%20Examples.md)
+Baby Care themed API for managing diaper bag preparation and outing planning. Practice API integration with real-world parenting scenarios!
+
+**Features:**
+- GET all outing types with required items
+- Check diaper bag readiness for specific outings
+- Plan for multiple outings with combined item lists
+- Great for learning data filtering and set operations
+
+---
+
 ## Current Modules
 
 ### Ghostbusters Equipment Checker
 
 Halloween-themed API integration challenge for checking ghost capture readiness based on equipment inventory.
+
+See [Apex Week of Horror 2025](./Apex%20Week%20of%20Horror%202025.md) for complete documentation and examples.
 
 #### Endpoints
 
@@ -120,6 +144,53 @@ The API includes 4 ghost entities:
 - Protection Grid
 - Proton Grenades
 - Ecto-1 Vehicle
+
+---
+
+### Baby Care Diaper Bag Checker
+
+Advent of Salesforce 2025 themed API for checking diaper bag readiness and planning baby outings.
+
+See [Advent of Salesforce 2025 API Examples](./Advent%20of%20Salesforce%202025%20API%20Examples.md) for complete documentation and examples.
+
+#### Endpoints
+
+##### GET /api/advent/outings
+
+Returns a list of all outing types with their required items.
+
+**Response Example:**
+
+```json
+{
+  "success": true,
+  "count": 6,
+  "outings": [
+    {
+      "outing_id": "outing-001",
+      "name": "Quick Errand",
+      "duration": "30 minutes",
+      "difficulty": 2,
+      "required_items": ["Diapers", "Wipes", "Pacifier", "Small Toy"],
+      "description": "A quick trip to the grocery store or pharmacy",
+      "tips": "Keep it light - you'll be back home soon!"
+    }
+  ]
+}
+```
+
+## Outing Types
+
+The API includes 6 outing types:
+
+1. **Quick Errand** - 30 minutes (Difficulty: 2/10) - 4 items
+2. **Doctor Visit** - 2 hours (Difficulty: 5/10) - 9 items
+3. **Day Trip** - 6-8 hours (Difficulty: 8/10) - 14 items
+4. **Restaurant Visit** - 1.5 hours (Difficulty: 6/10) - 9 items
+5. **Playdate** - 2-3 hours (Difficulty: 4/10) - 9 items
+6. **Shopping Trip** - 3 hours (Difficulty: 7/10) - 11 items
+
+---
 
 ## License
 
