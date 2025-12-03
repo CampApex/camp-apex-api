@@ -3,6 +3,25 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+
+  /* Christmas Theme Colors */
+  --cream: #fffef7;
+  --warm-red: #d32f2f;
+  --vintage-red: #c1272d;
+  --deep-green: #1b5e20;
+  --forest: #2e7d32;
+  --gold: #ffd700;
+  --warm-yellow: #fff9c4;
+  --soft-blue: #90caf9;
+  --charcoal: #3e2723;
+  --light-cream: #fff9e6;
+  --shadow: rgba(62, 39, 35, 0.2);
+  --glow: rgba(255, 215, 0, 0.6);
+
+  /* Fonts */
+  --font-sketch: "Cabin Sketch", cursive;
+  --font-handwritten: "Covered By Your Grace", cursive;
+  --font-body: "Nunito", sans-serif;
 }
 
 @theme inline {
@@ -23,4 +42,207 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+/* ========================================
+   UTILITY CLASSES FOR FONTS
+   ======================================== */
+
+.font-sketch {
+  font-family: var(--font-sketch);
+}
+
+.font-handwritten {
+  font-family: var(--font-handwritten);
+}
+
+.font-body {
+  font-family: var(--font-body);
+}
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+@keyframes fall {
+  0% {
+    transform: translateY(-10vh) rotate(0deg);
+    opacity: 0.7;
+  }
+  100% {
+    transform: translateY(110vh) rotate(360deg);
+    opacity: 0.7;
+  }
+}
+
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes twinkle {
+  0%,
+  100% {
+    opacity: 1;
+    filter: brightness(1.2);
+  }
+  50% {
+    opacity: 0.4;
+    filter: brightness(0.6);
+  }
+}
+
+@keyframes bounce {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* ========================================
+   TEXT SHADOW UTILITIES
+   ======================================== */
+
+.text-shadow-vintage {
+  text-shadow: 3px 3px 0px var(--gold);
+}
+
+.text-shadow-gold {
+  text-shadow: 3px 3px 0px var(--warm-red);
+}
+
+.text-shadow-lg {
+  text-shadow: 3px 3px 6px rgba(0, 0, 0, 0.3);
+}
+
+/* ========================================
+   CHRISTMAS LIGHTS STYLES
+   ======================================== */
+
+.christmas-lights-container {
+  left: 0;
+  width: 100%;
+  height: 120px;
+  pointer-events: none;
+  z-index: 1000;
+  display: flex;
+  justify-content: space-around;
+  padding: 0 2rem;
+}
+
+.christmas-light {
+  position: relative;
+  width: 15px;
+  height: 25px;
+}
+
+.bulb {
+  width: 15px;
+  height: 25px;
+  border-radius: 40% 40% 50% 50%;
+  position: relative;
+  animation: twinkle 1.5s ease-in-out infinite;
+  filter: brightness(1.2);
+}
+
+.bulb::before {
+  content: "";
+  position: absolute;
+  top: -5px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 2px;
+  height: 15px;
+  background: var(--charcoal);
+}
+
+.christmas-light.red .bulb {
+  background: radial-gradient(circle at 30% 30%, #ff6b6b, var(--warm-red));
+  box-shadow: 0 0 10px var(--warm-red), 0 0 20px var(--warm-red);
+  animation-delay: 0s;
+}
+
+.christmas-light.green .bulb {
+  background: radial-gradient(circle at 30% 30%, #66bb6a, var(--forest));
+  box-shadow: 0 0 10px var(--forest), 0 0 20px var(--forest);
+  animation-delay: 0.3s;
+}
+
+.christmas-light.yellow .bulb {
+  background: radial-gradient(circle at 30% 30%, #ffee58, var(--gold));
+  box-shadow: 0 0 10px var(--gold), 0 0 20px var(--gold);
+  animation-delay: 0.6s;
+}
+
+.christmas-light.blue .bulb {
+  background: radial-gradient(circle at 30% 30%, #64b5f6, #1976d2);
+  box-shadow: 0 0 10px #1976d2, 0 0 20px #1976d2;
+  animation-delay: 0.9s;
+}
+
+/* ========================================
+   RESPONSIVE DESIGN
+   ======================================== */
+
+@media (max-width: 768px) {
+  .christmas-lights-container {
+    padding: 0 1rem;
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* ========================================
+   CUSTOM BORDER WIDTHS
+   ======================================== */
+
+.border-3 {
+  border-width: 3px;
+}
+
+.border-5 {
+  border-width: 5px;
+}
+
+/* ========================================
+   DROP SHADOW UTILITIES
+   ======================================== */
+
+.drop-shadow-glow {
+  filter: drop-shadow(0 0 10px rgba(255, 215, 0, 0.6));
+}
+
+.drop-shadow-lg {
+  filter: drop-shadow(0 4px 6px rgba(0, 0, 0, 0.1));
 }
